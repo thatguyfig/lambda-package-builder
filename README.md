@@ -150,7 +150,7 @@ In a separate terminal run the below whilst the container is running to extract 
 
 If you need to first install other dependencies, the likes of unixODBC or PowerShell as an example, please see the directories inside `scripts/`, there you will find some example scripts to perform further install steps.
 
-Add your own to this section to, just make a folder for the software name and put the necessary install steps in an `install.sh` file so that it can be easily added. Please take note that any dependencies must be copied to `/var/task/code` or they will not be in deployment package.
+Add your own to this section to, just make a folder for the software name and put the necessary install steps in an `install.sh` file so that it can be easily added. Please take note that any dependencies must be copied to `/var/task` or they will not be in deployment package.
 
 Custom installs should always come before the `deploy.sh` and `zip.sh` as python modules can fail without custom software already present. If you don't include it before the `zip.sh` nothing will be included in the zip.
 
