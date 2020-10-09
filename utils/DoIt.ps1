@@ -1,9 +1,8 @@
-# define docker image name
 $ErrorActionPreference = "Stop"
+
+# define lambda function details
 $docker_image_name = "lambda-builder"
 $lambda_function_name = "TestPythonUpdate"
-$lambda_function_region = "us-east-1"
-$zip_path = "lambda-package.zip"
 
 # stop running containers
 Write-Host("[*] Stopping running containers:")
