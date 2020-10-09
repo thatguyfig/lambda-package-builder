@@ -1,18 +1,26 @@
 $ErrorActionPreference = "Stop"
 
+#################################################
+# DEFINE THE BELOW
+
 # define lambda function details
-$docker_image_name = "lambda-builder"
 $lambda_function_name = "TestPythonUpdate"
+$UpdateLambdaFunctionCode = $false
+
+################################################
+
+# docker image named used
+$docker_image_name = "lambda-builder"
 
 # stop running containers
 Write-Host("[*] Stopping running containers:")
-Start-Process "cmd" -ArgumentList "/C FOR /f `"tokens=*`" %i IN ('docker ps -q') DO docker stop %i" -Wait -NoNewWindow
+Start-Process "cmd" -ArgumentList "/C FOR /f `"tokens=*`" %i IN ('docker ps -q') DO docker stop %i" -Wait
 
 
 # delete previous images
 Write-Host("[*] Removing old images with same name...")
-Start-Process "cmd" -ArgumentList "/C docker image rm $docker_image_name -f" -Wait -NoNewWindow 
-Start-Process "cmd" -ArgumentList "/C docker image prune -f" -Wait -NoNewWindow
+Start-Process "cmd" -ArgumentList "/C docker image rm $docker_image_name -f" -Wait 
+Start-Process "cmd" -ArgumentList "/C docker image prune -f" -Wait
 Write-Host("  [+] Removed old images.")
 
 # run the docker build
@@ -29,5 +37,9 @@ Write-Host("  [+] Docker running image.")
 Write-Host("[*] Extract the ZIP file.")
 Start-Process "powershell" -ArgumentList "-file .\utils\ExtractZipFile.ps1" -NoNewWindow -Wait
 
-# finally update lambda function
-Start-Process "python" -ArgumentList "utils\update_lambda_function.py $lambda_function_name" -NoNewWindow -Wait
+If ($UpdateLambdaFunctionCode) {
+
+    # finally update lambda function
+    Start-Process "python" -ArgumentList "utils\update_lambda_function.py $lambda_function_name" -NoNewWindow -Wait
+
+}

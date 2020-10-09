@@ -1,0 +1,9 @@
+# all the archived functions
+function-archive/*
+
+# everything in code apart from the readme
+code/*
+!code/readme.md
+
+# any lambda package not archived
+lambda-package.zip

@@ -78,8 +78,15 @@ def archive_zip(function_zip_path, function_name):
         # create it
         os.mkdir('function-archive/{}'.format(function_name))
 
+    archive_path = 'function-archive/{0}/{1}'.format(function_name, function_zip_path)
+    
+    # remove already existing if
+    if os.path.exists(archive_path):
+
+        os.remove(archive_path)
+
     # finally move the zip file
-    os.rename(function_zip_path, 'function-archive/{0}/{1}'.format(function_name, function_zip_path))
+    os.rename(function_zip_path, archive_path)
     
 
 
