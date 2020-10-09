@@ -1,10 +1,10 @@
 # Extract the Lambda Package .zip
 
-# show all containers
-docker container ls
-
 # ask user for container name
-$containerName = Read-Host -Prompt "What is the name of your container? e.g. noun_verb"
+$containerName = docker container ls --latest --format "{{.Names}}"
 
 # copy the file
 docker cp "${containerName}:/lambda-package.zip" .
+
+# wait for 10 seconds
+Start-Sleep -Seconds 10

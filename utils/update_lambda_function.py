@@ -4,11 +4,17 @@
 """
 import boto3
 import os
+import sys
 
-# lambda details
-target_lambda_function_name = "TestPythonUpdate"
+if len(sys.argv) == 2:
+    # lambda details
+    target_lambda_function_name = sys.argv[1]
+
+else:
+    # lambda details
+    target_lambda_function_name = "TestPythonUpdate"
 target_lambda_function_region = "us-east-1"
-function_zip_path = 'vc-collector.zip'
+function_zip_path = 'lambda-package.zip'
 
 # upload function zip to s3
 def upload_lambda_package(function_zip_path, target_lambda_function_name):
