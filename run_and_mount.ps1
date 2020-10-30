@@ -1,0 +1,1 @@
+docker run --rm -it -v ${PWD}/output:/output --entrypoint bash lambda-builder
